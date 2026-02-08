@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAIDO - ملابس رجالية فاخرة</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* التصميم الأساسي */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* الشعار */
+        header {
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            font-size: 36px;
+            color: #B22222;
+        }
+        
+        .logo-text {
+            display: flex;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        
+        .logo-text span {
+            display: inline-block;
+            transition: transform 0.3s, color 0.3s;
+        }
+        
+        .logo-text .c { color: #B22222; }
+        .logo-text .a { color: #9B1B1B; }
+        .logo-text .i { color: #000; }
+        .logo-text .d { color: #9B1B1B; }
+        .logo-text .o { color: #B22222; }
+        
+        .logo:hover .logo-text span {
+            transform: translateY(-3px);
+        }
+        
+        .logo-tagline {
+            font-size: 12px;
+            color: #666;
+            margin-top: -5px;
+            letter-spacing: 1px;
+        }
+        
+        /* القائمة */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            font-size: 16px;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: #B22222;
+            transition: width 0.3s;
+        }
+        
+        nav a:hover {
+            color: #B22222;
+        }
+        
+        nav a:hover:after {
+            width: 100%;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .cart-icon, .search-icon {
+            font-size: 20px;
+            cursor: pointer;
+            color: #333;
+            transition: color 0.3s;
+        }
+        
+        .cart-icon:hover, .search-icon:hover {
+            color: #B22222;
+        }
+        
+        /* الهيرو */
+        .hero {
+            background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(178,34,34,0.7) 100%),
+                        url('https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 52px;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: #f0f0f0;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #B22222;
+            color: white;
+            padding: 16px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            transition: all 0.3s;
+            border: 2px solid #B22222;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            background: transparent;
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(178,34,34,0.3);
+        }
+        
+        /* الفئات */
+        .categories {
+            padding: 80px 0 60px;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #222;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: #B22222;
+            margin: 15px auto;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .category-card {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 300px;
+            transition: transform 0.4s;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .category-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .category-overlay {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            color: white;
+            padding: 25px;
+        }
+        
+        .category-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        /* المنتجات */
+        .products {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 35px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: all 0.4s;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #B22222;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            z-index: 2;
+        }
+        
+        .product-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #222;
+        }
+        
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .current-price {
+            color: #B22222;
+            font-size: 22px;
+            font-weight: 800;
+        }
+        
+        .old-price {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 16px;
+        }
+        
+        .add-to-cart {
+            width: 100%;
+            background: #222;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .add-to-cart:hover {
+            background: #B22222;
+        }
+        
+        /* العروض */
+        .offer {
+            background: linear-gradient(135deg, #222 0%, #444 100%);
+            color: white;
+            padding: 70px 0;
+            text-align: center;
+            margin: 60px 0;
+        }
+        
+        .offer h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        
+        .offer p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .offer-code {
+            background: #B22222;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            display: inline-block;
+            font-weight: 700;
+            font-size: 20px;
+            letter-spacing: 3px;
+            margin-top: 20px;
+        }
+        
+        /* الفوتر */
+        footer {
+            background: #222;
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            color: #B22222;
+            font-size: 22px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -8px;
+            width: 50px;
+            height: 2px;
+            background: #B22222;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #B22222;
+            padding-right: 5px;
+        }
+        
+        .contact-info p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ccc;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        /* للتجاوب */
+        @media (max-width: 992px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 40px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero {
+                padding: 80px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">👔</div>
+                <div>
+                    <div class="logo-text">
+                        <span class="c">C</span>
+                        <span class="a">A</span>
+                        <span class="i">I</span>
+                        <span class="d">D</span>
+                        <span class="o">O</span>
+                    </div>
+                    <div class="logo-tagline">ملابس رجالية فاخرة</div>
+                </div>
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#categories">الفئات</a></li>
+                    <li><a href="#products">المنتجات</a></li>
+                    <li><a href="#new">الجديد</a></li>
+                    <li><a href="#contact">اتصل بنا</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="search-icon">🔍</div>
+                <div class="cart-icon">🛒 <span class="cart-count">0</span></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- القسم الرئيسي -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>أناقة لا تُقاوم</h1>
+            <p>اكتشف أحدث تشكيلة من الملابس الرجالية المصممة بعناية فائقة لتواكب أحدث صيحات الموضة العالمية</p>
+            <a href="#products" class="btn">تسوق الآن</a>
+        </div>
+    </section>
+
+    <!-- الفئات -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <h2 class="section-title">تصفح الفئات</h2>
+            <div class="category-grid">
+                <div class="category-card">
+                    <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="قمصان">
+                    <div class="category-overlay">
+                        <div class="category-title">قمصان</div>
+                        <p>أناقة المكتب والمناسبات</p>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="جينز">
+                    <div class="category-overlay">
+                        <div class="category-title">جينز</div>
+                        <p>راحة وأناقة يومية</p>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <img src="https://images.unsplash.com/photo-1574180045827-681f8a1a9622?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="كنزات">
+                    <div class="category-overlay">
+                        <div class="category-title">كنزات</div>
+                        <p>دفئ وأناقة شتوية</p>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="سترات">
+                    <div class="category-overlay">
+                        <div class="category-title">سترات</div>
+                        <p>جرأة وتميز</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- المنتجات -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title">الأكثر مبيعاً</h2>
+            <div class="product-grid">
+                
+                <!-- المنتج 1 -->
+                <div class="product-card">
+                    <div class="product-badge">جديد</div>
+                    <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                         alt="قميص رسمي" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-title">قميص قطني رسمي</h3>
+                        <div class="product-price">
+                            <span class="current-price">249 درهم</span>
+                            <span class="old-price">299 درهم</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart('قميص رسمي', 249)">أضف إلى السلة</button>
+                    </div>
+                </div>
+                
+                <!-- المنتج 2 -->
+                <div class="product-card">
+                    <div class="product-badge">عرض</div>
+                    <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                         alt="جينز أزرق" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-title">جينز أزرق Slim Fit</h3>
+                        <div class="product-price">
+                            <span class="current-price">329 درهم</span>
+                            <span class="old-price">399 درهم</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart('جينز أزرق', 329)">أضف إلى السلة</button>
+                    </div>
+                </div>
+                
+                <!-- المنتج 3 -->
+                <div class="product-card">
+                    <div class="product-badge">الأفضل</div>
+                    <img src="https://images.unsplash.com/photo-1574180045827-681f8a1a9622?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                         alt="كنزة صوف" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-title">كنزة صوف أنيقة</h3>
+                        <div class="product-price">
+                            <span class="current-price">189 درهم</span>
+                            <span class="old-price">229 درهم</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart('كنزة صوف', 189)">أضف إلى السلة</button>
+                    </div>
+                </div>
+                
+                <!-- المنتج 4 -->
+                <div class="product-card">
+                    <div class="product-badge">محدود</div>
+                    <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                         alt="سترة جلدية" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-title">سترة جلدية سوداء</h3>
+                        <div class="product-price">
+                            <span class="current-price">899 درهم</span>
+                            <span class="old-price">999 درهم</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart('سترة جلدية', 899)">أضف إلى السلة</button>
+                    </div>
+                </div>
+                
+                <!-- المنتج 5 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1594938372629-76a1bc5d5fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                         alt="بدلة رسمية" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-title">بدلة رسمية كاملة</h3>
+                        <div class="product-price">
+                            <span class="current-price">1499 درهم</span>
+                            <span class="old-price">1799 درهم</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart('بدلة رسمية', 1499)">أضف إلى السلة</button>
+                    </div>
+                </div>
+                
+                <!-- المنتج 6 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                         alt="تيشيرت" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-title">تيشيرت قطني مريح</h3>
+                        <div class="product-price">
+                            <span class="current-price">99 درهم</span>
+                            <span class="old-price">129 درهم</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart('تيشيرت', 99)">أضف إلى السلة</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- العروض -->
+    <section class="offer">
+        <div class="container">
+            <h2>خصم 30% على أول طلبية</h2>
+            <p>استخدم الكود أدناه واحصل على خصم حصري</p>
+            <div class="offer-code">CAIDO30</div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>عن كايدو</h3>
+                    <p>نحن نقدم أجود أنواع الملابس الرجالية التي تجمع بين الأناقة والجودة والراحة.</p>
+                    <div class="contact-info">
+                        <p>📍 الدار البيضاء، المغرب</p>
+                        <p>📞 0522-123456</p>
+                        <p>✉️ info@caido.com</p>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#categories">الفئات</a></li>
+                        <li><a href="#products">المنتجات</a></li>
+                        <li><a href="#new">الجديد</a></li>
+                        <li><a href="#contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>المساعدة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">الشحن والتوصيل</a></li>
+                        <li><a href="#">الاستبدال والإرجاع</a></li>
+                        <li><a href="#">دليل المقاسات</a></li>
+                        <li><a href="#">الأسئلة الشائعة</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                © 2024 CAIDO - جميع الحقوق محفوظة | تم التصميم والتطوير بكل حب
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // سلة المشتريات
+        let cartCount = 0;
+        let cartTotal = 0;
+        
+        function addToCart(productName, price) {
+            cartCount++;
+            cartTotal += price;
+            
+            // تحديث العداد
+            document.querySelector('.cart-count').textContent = cartCount;
+            
+            // رسالة تأكيد
+            alert(`تم إضافة "${productName}" إلى سلة المشتريات!\nالسعر: ${price} درهم\nإجمالي السلة: ${cartTotal} درهم`);
+            
+            // تأثير بسيط
+            const button = event.target;
+            button.innerHTML = '✓ تمت الإضافة';
+            button.style.background = '#28a745';
+            
+            setTimeout(() => {
+                button.innerHTML = 'أضف إلى السلة';
+                button.style.background = '#222';
+            }, 2000);
+        }
+        
+        // البحث
+        document.querySelector('.search-icon').addEventListener('click', function() {
+            const searchTerm = prompt('ما الذي تبحث عنه؟');
+            if (searchTerm) {
+                alert(`بحث عن: "${searchTerm}"\nسيتم عرض النتائج قريباً`);
+            }
+        });
+        
+        // تأثيرات عند التمرير
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.15)';
+            } else {
+                header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
+            }
+        });
+        
+        // عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('موقع CAIDO جاهز للتسوق!');
+        });
+    </script>
+</body>
+</html>
